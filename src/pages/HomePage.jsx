@@ -15,8 +15,8 @@ export default function HomePage() {
             color: #ffffff;
             font-weight: 700;
             text-shadow:
-                0 -4px 10px #CE7E4F,     /* warm top glow */
-                0 4px 10px #1B66FA,      /* cool bottom glow */
+                0 -4px 8px #CE7E4F,     /* warm top glow */
+                0 4px 8px #1B66FA,      /* cool bottom glow */
                 0 0 5px #ffffff,        /* strong white center glow */
                 0 0 30px rgba(255,255,255,0.1),  /* ambient aura with a darker edge */
                 0 0px 30px rgba(255,140,0,1); 
