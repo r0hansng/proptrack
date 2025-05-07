@@ -85,13 +85,13 @@ const Dashboard = () => {
         investment: p.investmentRequired,
     }));
 
-    const growthData = Array.from({ length: 4 }).map((_, i) => {
-        const obj = { name: `Month ${i + 1}` };
-        investedProperties.forEach((p) => {
-            obj[p.title] = p.valueGrowth?.[i] || 0;
-        });
-        return obj;
-    });
+    // const growthData = Array.from({ length: 4 }).map((_, i) => {
+    //     const obj = { name: `Month ${i + 1}` };
+    //     investedProperties.forEach((p) => {
+    //         obj[p.title] = p.valueGrowth?.[i] || 0;
+    //     });
+    //     return obj;
+    // });
 
     const topPerformingProperties = investedProperties
         .map((p) => {
