@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../components/UI/Button/Button";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/images/hero_image.jpg";
 import FAQ from "../features/FAQ";
 import HowItWorks from "../features/HowItWorks";
 import Testimonials from "../features/Testimonials";
+import { useNavigate } from "react-router-dom";
+import Toast from "../components/UI/Toast/Toast";
 
 export default function HomePage() {
+    const navigate = useNavigate();
+    const [showToast, setShowToast] = useState(false);
+
+    const handleUseClick = () => {
+        const user =
+            JSON.parse(localStorage.getItem("proptrack_user")) ||
+            JSON.parse(sessionStorage.getItem("proptrack_user"));
+
+        if (user?.isLoggedIn) {
+            navigate("/properties");
+        } else {
+            setShowToast(true);
+            setTimeout(() => {
+                setShowToast(false);
+                navigate("/login");
+            }, 3500);
+        }
+    };
     return (
         <>
+            {showToast && (
+                <Toast
+                    title="Login Required"
+                    description="Please log in to use the application."
+                    show={showToast}
+                />
+            )}
+            <Toast
+                title="Login Required"
+                description="Please log in to use the application."
+                show={showToast}
+            />
             <style>
                 {`
         .gradient-text {
@@ -23,11 +55,6 @@ export default function HomePage() {
         }
     `}
             </style>
-
-
-
-
-
 
             <div className="relative overflow-hidden text-white bg-black">
 
@@ -45,11 +72,19 @@ export default function HomePage() {
                         <p className="max-w-2xl mx-auto mb-6 text-lg sm:text-xl text-white/80">
                             Invest with ease. Experience a new era of property management, where simplicity meets sophistication.
                         </p>
-                        <Link to="/register">
+                        {/* <Link to="/properties">
                             <Button variant="primary" size="default" className="h-10 mt-10 text-lg rounded-3xl">
                                 Use
                             </Button>
-                        </Link>
+                        </Link> */}
+                        <Button
+                            variant="primary"
+                            size="default"
+                            className="h-10 mt-10 text-lg rounded-3xl"
+                            onClick={handleUseClick}
+                        >
+                            Use
+                        </Button>
                         <p className="mt-6 font-semibold text-white">
                             Try it now for $0.00/mo.
                         </p>

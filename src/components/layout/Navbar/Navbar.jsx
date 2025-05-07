@@ -43,14 +43,24 @@ export default function Navbar() {
                         >
                             About
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="/properties"
                             className={({ isActive }) =>
                                 isActive ? "text-white/95" : "text-white/75"
                             }
                         >
                             Properties
-                        </NavLink>
+                        </NavLink> */}
+                        {isLoggedIn && (
+                            <NavLink
+                                to="/properties"
+                                className={({ isActive }) =>
+                                    isActive ? "text-white/95" : "text-white/75"
+                                }
+                            >
+                                Properties
+                            </NavLink>
+                        )}
                         <NavLink
                             to="/contact"
                             className={({ isActive }) =>

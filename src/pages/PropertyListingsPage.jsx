@@ -32,159 +32,76 @@ const sampleProperties = [
         ownershipShare: 50,
         leaseTerms: "24 months"
     },
+];
+
+const investedProperties = [
     {
-        id: 2,
-        title: "Cozy House in San Francisco",
-        location: "San Francisco, CA",
-        price: 1250000,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96etH0qSsfP7s38WOM-hm1dAZTMP1iwpGyA&s",
-        type: "House",
-        bedrooms: 3,
+        id: 101,
+        title: "Lakeview Condo in Chicago",
+        location: "Chicago, IL",
+        price: 950000,
+        imageUrl: "https://photos.zillowstatic.com/fp/5a9c314c1b25f63255d26fbc7d347f76-p_e.jpg",
+        type: "Condo",
+        bedrooms: 2,
         bathrooms: 2,
-        area: "1800",
-        furnishing: "Semi-Furnished",
-        investmentRequired: 200000,
-        ownershipShare: 50,
-        leaseTerms: "24 months"
-    },
-    {
-        id: 2,
-        title: "Cozy House in San Francisco",
-        location: "San Francisco, CA",
-        price: 1250000,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96etH0qSsfP7s38WOM-hm1dAZTMP1iwpGyA&s",
-        type: "House",
-        bedrooms: 3,
-        bathrooms: 2,
-        area: "1800",
-        furnishing: "Semi-Furnished",
-        investmentRequired: 200000,
-        ownershipShare: 50,
-        leaseTerms: "24 months"
-    },
-    {
-        id: 2,
-        title: "Cozy House in San Francisco",
-        location: "San Francisco, CA",
-        price: 1250000,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96etH0qSsfP7s38WOM-hm1dAZTMP1iwpGyA&s",
-        type: "House",
-        bedrooms: 3,
-        bathrooms: 2,
-        area: "1800",
-        furnishing: "Semi-Furnished",
-        investmentRequired: 200000,
-        ownershipShare: 50,
-        leaseTerms: "24 months"
-    },
-    {
-        id: 2,
-        title: "Cozy House in San Francisco",
-        location: "San Francisco, CA",
-        price: 1250000,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96etH0qSsfP7s38WOM-hm1dAZTMP1iwpGyA&s",
-        type: "House",
-        bedrooms: 3,
-        bathrooms: 2,
-        area: "1800",
-        furnishing: "Semi-Furnished",
-        investmentRequired: 200000,
-        ownershipShare: 50,
-        leaseTerms: "24 months"
-    },
-    {
-        id: 2,
-        title: "Cozy House in San Francisco",
-        location: "San Francisco, CA",
-        price: 1250000,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96etH0qSsfP7s38WOM-hm1dAZTMP1iwpGyA&s",
-        type: "House",
-        bedrooms: 3,
-        bathrooms: 2,
-        area: "1800",
-        furnishing: "Semi-Furnished",
-        investmentRequired: 200000,
-        ownershipShare: 50,
-        leaseTerms: "24 months"
+        area: "1400",
+        furnishing: "Furnished",
+        investmentRequired: 150000,
+        ownershipShare: 30,
+        leaseTerms: "18 months"
     },
 ];
 
 export default function PropertyListingPage() {
-    const [properties, setProperties] = useState([]);
+    const [activeTab, setActiveTab] = useState("investNow");
 
-    useEffect(() => {
-        setProperties(sampleProperties);
-    }, []);
+    const getTabStyle = (tab) =>
+        `px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer ${activeTab === tab
+            ? "bg-white text-black"
+            : "bg-transparent text-white hover:bg-white hover:text-black"
+        }`;
+
+    const displayedProperties =
+        activeTab === "investNow" ? sampleProperties : investedProperties;
 
     return (
-        <div className="min-h-screen px-6 py-20 text-white bg-black sm:px-12">
+        <div className="relative min-h-screen px-6 py-20 text-white bg-black sm:px-12">
             <div className="absolute inset-0 bg-[url('/dots.svg')] opacity-10 mix-blend-soft-light z-0"></div>
 
-            <h1 className="mb-8 text-3xl font-medium text-left">
-                Available Properties. <span className="text-amber-600">Take your pick.</span>
-            </h1>
-            <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {properties.map((property) => (
-                    <PropertyCard key={property.id} property={property} />
+            {/* Glassmorphic Tab Container */}
+            <div className="relative z-10 flex justify-center p-2 mb-6 space-x-2 border border-white/10 bg-white/15 rounded-xl bg-opacity-20 backdrop-blur-md border-opacity-30 w-fit">
+                <button
+                    onClick={() => setActiveTab("investNow")}
+                    className={getTabStyle("investNow")}
+                >
+                    Invest Now
+                </button>
+                <button
+                    onClick={() => setActiveTab("yourInvestments")}
+                    className={getTabStyle("yourInvestments")}
+                >
+                    Your Investments
+                </button>
+            </div>
+
+            {activeTab === "investNow" && (
+                <h1 className="relative z-10 mb-8 text-3xl font-medium text-left">
+                    Available Properties. <span className="text-amber-600">Take your pick.</span>
+                </h1>
+            )}
+
+            {/* Show Heading only when "Your Investments" tab is active */}
+            {activeTab === "yourInvestments" && (
+                <h1 className="relative z-10 mb-8 text-3xl font-medium text-left">
+                    Track you Investments. <span className="text-amber-600">Simple. Easy.</span>
+                </h1>
+            )}
+
+            <div className="relative z-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {displayedProperties.map((property) => (
+                    <PropertyCard key={`${activeTab}-${property.id}`} property={property} />
                 ))}
             </div>
         </div>
     );
-
 }
-
-
-// import React, { useState, useEffect } from "react";
-// import PropertyCard from "../components/PropertyCard/PropertyCard";
-// import Loader from "../components/UI/Loader/Loader";
-
-// export default function PropertyListingPage() {
-//     const [properties, setProperties] = useState([]);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(null);
-
-//     useEffect(() => {
-//         const fetchProperties = async () => {
-//             try {
-//                 const response = await fetch('https://api.rentcast.io/v1/properties?postalCode=94043', {
-//                     headers: {
-//                         'X-Api-Key': import.meta.env.VITE_RENTCAST_API_KEY, 
-//                     },
-//                 });
-
-//                 if (!response.ok) {
-//                     throw new Error("Failed to fetch property data");
-//                 }
-
-//                 const data = await response.json();
-//                 console.log("Fetched property data:", data); // Log the fetched data
-//                 setProperties(data.properties); // Assuming the API response contains a 'properties' field
-//                 setLoading(false);
-//             } catch (error) {
-//                 setError(error.message);
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchProperties();
-//     }, []);
-
-//     if (loading) {
-//         return <Loader />;
-//     }
-
-//     if (error) {
-//         return <div>{error}</div>;
-//     }
-
-//     return (
-//         <div className="min-h-screen px-6 py-20 text-white sm:px-12">
-//             <h1 className="mb-8 text-3xl font-bold text-center">Explore Properties</h1>
-//             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-//                 {properties.map((property) => (
-//                     <PropertyCard key={property.id} property={property} />
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }

@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaBed, FaBath, FaRegHeart, FaShareAlt, FaDownload, FaPhoneAlt } from "react-icons/fa";
 import PropTypes from 'prop-types';
+import { FaBed, FaBath } from "react-icons/fa";
 import Chip from "../UI/Chip/Chip";
 import Button from "../UI/Button/Button";
+import { motion } from "framer-motion";
 
 export default function PropertyCard({ property }) {
-
     const [isWishlisted, setIsWishlisted] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("wishlist") || "{}");
         setIsWishlisted(!!saved[property.id]);
     }, [property.id]);
 
-    const toggleWishlist = () => {
+    const toggleWishlist = (e) => {
+        e.stopPropagation(); // Prevent modal from opening
         const saved = JSON.parse(localStorage.getItem("wishlist") || "{}");
         const updated = {
             ...saved,
@@ -27,28 +31,84 @@ export default function PropertyCard({ property }) {
     const formattedPrice = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-        maximumFractionDigits: 0
+        maximumFractionDigits: 0,
     }).format(property.price);
 
     const formattedInvestment = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-        maximumFractionDigits: 0
+        maximumFractionDigits: 0,
     }).format(property.investmentRequired);
 
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
+
     return (
-        <div className="overflow-hidden transition-shadow duration-200 border border-gray-200 shadow-sm rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-white/10 dark:border-white/10 hover:shadow-md">
-            <div className="p-4">
+        <div
+            className="relative overflow-hidden transition-shadow duration-200 border border-gray-200 shadow-sm cursor-pointer rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-white/10 dark:border-white/10 hover:shadow-md"
+            onClick={openModal}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Modal */}
+            {showModal && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+                    onClick={closeModal}
+                >
+                    <div
+                        className="relative bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl w-[90%] max-w-lg"
+                        onClick={(e) => e.stopPropagation()} // Prevent modal close on content click
+                    >
+                        <button
+                            onClick={closeModal}
+                            className="absolute flex items-center justify-center font-medium text-white cursor-pointer text-md top-3 right-4"
+                        >
+                            ×
+                        </button>
+
+                        <h2 className="mb-4 text-xl font-semibold">Modal Content</h2>
+                        <p className="text-gray-700 dark:text-gray-300">This is a blank modal. You can add more content here.</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Image and Know More Button */}
+            <div className="relative p-4">
                 <img
                     src={property.imageUrl}
                     alt={property.title}
                     className="object-cover w-full h-48 rounded-2xl"
                 />
+
+                {isHovered && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="absolute inset-0 flex items-center justify-center rounded-2xl"
+                    >
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent modal from opening
+                                openModal();
+                            }}
+                            className="text-white duration-500 bg-black shadow-lg rounded-3xl hover:bg-blue-500"
+                        >
+                            Know More
+                        </Button>
+                    </motion.div>
+                )}
             </div>
 
+            {/* Property Details */}
             <div className="p-4 space-y-2 text-gray-800 dark:text-white">
                 <h2 className="text-xl font-semibold">{property.title}</h2>
-                <p className="text-sm text-gray-600 dark:text-white/60">{property.type} • {property.location}</p>
+                <p className="text-sm text-gray-600 dark:text-white/60">
+                    {property.type} • {property.location}
+                </p>
 
                 <div className="flex flex-wrap gap-2 mt-2">
                     <Chip label={`${property.bedrooms} Bed`} variant="primary" size="sm" icon={FaBed} />
@@ -71,12 +131,12 @@ export default function PropertyCard({ property }) {
                     </div>
                 </div>
 
-                {/* Action Buttons (Add to Watchlist, Share, Download, Schedule Call, Invest Now) */}
+                {/* Action Buttons */}
                 <div className="flex items-center justify-between gap-2 mt-4">
                     <div className="flex items-center gap-2">
                         <button
                             title="Add to Watchlist"
-                            onClick={toggleWishlist}
+                            onClick={toggleWishlist} // Prevent modal from opening
                             className="text-sm cursor-pointer"
                         >
                             <span role="img" aria-label="wishlist">
@@ -84,18 +144,39 @@ export default function PropertyCard({ property }) {
                             </span>
                         </button>
 
-                        <button title="Share" className="cursor-pointer text-md">􀈂</button>
-                        <button title="Download Report" className="cursor-pointer text-md">􀁸</button>
-                        <button title="Schedule Call" className="cursor-pointer text-md">􀒥</button>
+                        <button
+                            title="Share"
+                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            className="cursor-pointer text-md"
+                        >
+                            􀈂
+                        </button>
+
+                        <button
+                            title="Download Report"
+                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            className="cursor-pointer text-md"
+                        >
+                            􀁸
+                        </button>
+
+                        <button
+                            title="Schedule Call"
+                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            className="cursor-pointer text-md"
+                        >
+                            􀒥
+                        </button>
+
                     </div>
 
-                    {/* Invest Now Button shifted to the right */}
                     <div className="ml-auto">
                         <Link className="w-full">
                             <Button
                                 variant="primary"
                                 size="sm"
                                 className="font-normal rounded-lg"
+                                onClick={(e) => e.stopPropagation()} // Prevent modal from opening
                             >
                                 Invest Now
                             </Button>
@@ -123,4 +204,4 @@ PropertyCard.propTypes = {
         ownershipShare: PropTypes.number.isRequired,
         leaseTerms: PropTypes.string.isRequired,
     }).isRequired,
-};
+}
