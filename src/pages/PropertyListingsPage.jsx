@@ -54,11 +54,18 @@ const investedProperties = [
 
 export default function PropertyListingPage() {
     const [activeTab, setActiveTab] = useState("investNow");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+        setIsLoggedIn(loggedIn);
+    }, []);
 
     const getTabStyle = (tab) =>
-        `px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer ${activeTab === tab
-            ? "bg-white text-black"
-            : "bg-transparent text-white hover:bg-white hover:text-black"
+        `px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer ${
+            activeTab === tab
+                ? "bg-white text-black"
+                : "bg-transparent text-white hover:bg-white hover:text-black"
         }`;
 
     const displayedProperties =
@@ -68,7 +75,7 @@ export default function PropertyListingPage() {
         <div className="relative min-h-screen px-6 py-20 text-white bg-black sm:px-12">
             <div className="absolute inset-0 bg-[url('/dots.svg')] opacity-10 mix-blend-soft-light z-0"></div>
 
-            {/* Glassmorphic Tab Container */}
+            {/* Tabs */}
             <div className="relative z-10 flex justify-center p-2 mb-6 space-x-2 border border-white/10 bg-white/15 rounded-xl bg-opacity-20 backdrop-blur-md border-opacity-30 w-fit">
                 <button
                     onClick={() => setActiveTab("investNow")}
@@ -84,23 +91,38 @@ export default function PropertyListingPage() {
                 </button>
             </div>
 
+            {/* Headings */}
             {activeTab === "investNow" && (
                 <h1 className="relative z-10 mb-8 text-3xl font-medium text-left">
                     Available Properties. <span className="text-amber-600">Take your pick.</span>
                 </h1>
             )}
 
-            {/* Show Heading only when "Your Investments" tab is active */}
-            {activeTab === "yourInvestments" && (
+            {activeTab === "yourInvestments" && isLoggedIn && (
                 <h1 className="relative z-10 mb-8 text-3xl font-medium text-left">
-                    Track you Investments. <span className="text-amber-600">Simple. Easy.</span>
+                    Track your Investments. <span className="text-amber-600">Simple. Easy.</span>
                 </h1>
             )}
 
-            <div className="relative z-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {displayedProperties.map((property) => (
-                    <PropertyCard key={`${activeTab}-${property.id}`} property={property} />
-                ))}
+            {/* Content */}
+            <div className="relative z-10">
+                {activeTab === "yourInvestments" && !isLoggedIn ? (
+                    <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
+                        <p className="mb-6 mt-80 text-5xl font-semibold text-white /w-[40%]">Log in to see the properties you are invested in.</p>
+                        {/* <button
+                            className="px-6 py-2 text-white transition bg-blue-500 rounded-full hover:bg-blue-600"
+                            onClick={() => window.location.href = "/login"}
+                        >
+                            Log in
+                        </button> */}
+                    </div>
+                ) : (
+                    <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {displayedProperties.map((property) => (
+                            <PropertyCard key={`${activeTab}-${property.id}`} property={property} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

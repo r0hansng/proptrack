@@ -5,20 +5,20 @@ import PropTypes from 'prop-types';
 import { FaBed, FaBath } from "react-icons/fa";
 import Chip from "../UI/Chip/Chip";
 import Button from "../UI/Button/Button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function PropertyCard({ property }) {
     const [isWishlisted, setIsWishlisted] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [selectedProperty, setSelectedProperty] = useState(null); // Added for dynamic modal content
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("wishlist") || "{}");
         setIsWishlisted(!!saved[property.id]);
     }, [property.id]);
 
-    const toggleWishlist = (e) => {
-        e.stopPropagation(); // Prevent modal from opening
+    const toggleWishlist = () => {
         const saved = JSON.parse(localStorage.getItem("wishlist") || "{}");
         const updated = {
             ...saved,
@@ -40,38 +40,76 @@ export default function PropertyCard({ property }) {
         maximumFractionDigits: 0,
     }).format(property.investmentRequired);
 
-    const openModal = () => setShowModal(true);
-    const closeModal = () => setShowModal(false);
+    const openModal = (property) => {
+        setSelectedProperty(property); // Set selected property for modal
+        setShowModal(true);
+    };
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedProperty(null); // Reset selected property when modal is closed
+    };
 
     return (
         <div
-            className="relative overflow-hidden transition-shadow duration-200 border border-gray-200 shadow-sm cursor-pointer rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-white/10 dark:border-white/10 hover:shadow-md"
-            onClick={openModal}
+            className="relative overflow-hidden transition-all duration-200 border border-gray-200 shadow-sm cursor-pointer rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-white/10 dark:border-white/10 hover:scale-102 hover:shadow-md"
+            onClick={() => openModal(property)} // Pass the property to open the modal
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Modal */}
-            {showModal && (
-                <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-                    onClick={closeModal}
-                >
-                    <div
-                        className="relative bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl w-[90%] max-w-lg"
-                        onClick={(e) => e.stopPropagation()} // Prevent modal close on content click
+            {/* Modal with dynamic content */}
+            <AnimatePresence>
+                {showModal && selectedProperty && (
+                    <motion.div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-2xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={closeModal}
                     >
-                        <button
-                            onClick={closeModal}
-                            className="absolute flex items-center justify-center font-medium text-white cursor-pointer text-md top-3 right-4"
+                        <motion.div
+                            className="relative bg-white dark:bg-black/90 backdrop-blur-2xl p-6 rounded-2xl shadow-xl w-[90%] max-w-lg"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={(e) => e.stopPropagation()} // Prevent modal close on content click
                         >
-                            ×
-                        </button>
+                            <button
+                                onClick={closeModal}
+                                className="absolute flex items-center justify-center text-sm font-bold text-white cursor-pointer top-3 right-4"
+                            >
+                                ×
+                            </button>
 
-                        <h2 className="mb-4 text-xl font-semibold">Modal Content</h2>
-                        <p className="text-gray-700 dark:text-gray-300">This is a blank modal. You can add more content here.</p>
-                    </div>
-                </div>
-            )}
+                            <h2 className="mb-4 text-2xl font-semibold">About this property</h2>
+                            <p className="text-gray-700 dark:text-gray-300">
+                                {selectedProperty.description || "No description available."}
+                            </p>
+
+                            {/* Display Property Details */}
+                            <div className="mt-4">
+                                <h3 className="text-lg font-semibold">Investment Details</h3>
+                                <p><strong>Investment Required:</strong> {formattedInvestment}</p>
+                                <p><strong>Ownership:</strong> {selectedProperty.ownershipShare}%</p>
+                                <p><strong>Lease Terms:</strong> {selectedProperty.leaseTerms}</p>
+                            </div>
+
+                            <div className="mt-4">
+                                <h3 className="text-lg font-semibold">Property Information</h3>
+                                <p><strong>Type:</strong> {selectedProperty.type}</p>
+                                <p><strong>Location:</strong> {selectedProperty.location}</p>
+                                <p><strong>Bedrooms:</strong> {selectedProperty.bedrooms}</p>
+                                <p><strong>Bathrooms:</strong> {selectedProperty.bathrooms}</p>
+                                <p><strong>Area:</strong> {selectedProperty.area} sq.ft</p>
+                                <p><strong>Furnishing:</strong> {selectedProperty.furnishing}</p>
+                            </div>
+
+                            {/* Add more dynamic property-related content as needed */}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Image and Know More Button */}
             <div className="relative p-4">
@@ -92,8 +130,8 @@ export default function PropertyCard({ property }) {
                         <Button
                             variant="secondary"
                             onClick={(e) => {
-                                e.stopPropagation(); // Prevent modal from opening
-                                openModal();
+                                e.stopPropagation();
+                                openModal(property); // Pass the property to open the modal
                             }}
                             className="text-white duration-500 bg-black shadow-lg rounded-3xl hover:bg-blue-500"
                         >
@@ -136,7 +174,10 @@ export default function PropertyCard({ property }) {
                     <div className="flex items-center gap-2">
                         <button
                             title="Add to Watchlist"
-                            onClick={toggleWishlist} // Prevent modal from opening
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleWishlist();
+                            }}
                             className="text-sm cursor-pointer"
                         >
                             <span role="img" aria-label="wishlist">
@@ -146,7 +187,7 @@ export default function PropertyCard({ property }) {
 
                         <button
                             title="Share"
-                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            onClick={(e) => e.stopPropagation()}
                             className="cursor-pointer text-md"
                         >
                             􀈂
@@ -154,7 +195,7 @@ export default function PropertyCard({ property }) {
 
                         <button
                             title="Download Report"
-                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            onClick={(e) => e.stopPropagation()}
                             className="cursor-pointer text-md"
                         >
                             􀁸
@@ -162,7 +203,7 @@ export default function PropertyCard({ property }) {
 
                         <button
                             title="Schedule Call"
-                            onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            onClick={(e) => e.stopPropagation()}
                             className="cursor-pointer text-md"
                         >
                             􀒥
@@ -176,7 +217,6 @@ export default function PropertyCard({ property }) {
                                 variant="primary"
                                 size="sm"
                                 className="font-normal rounded-lg"
-                                onClick={(e) => e.stopPropagation()} // Prevent modal from opening
                             >
                                 Invest Now
                             </Button>
@@ -203,5 +243,6 @@ PropertyCard.propTypes = {
         furnishing: PropTypes.string.isRequired,
         ownershipShare: PropTypes.number.isRequired,
         leaseTerms: PropTypes.string.isRequired,
+        description: PropTypes.string, // Optional description for modal content
     }).isRequired,
-}
+};

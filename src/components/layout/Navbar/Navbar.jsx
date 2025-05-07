@@ -1,10 +1,18 @@
+/* eslint-disable no-unused-vars */
+// ! This is not being used in the app yet. It is a work in progress.
+
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Button from "../../UI/Button/Button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
     const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen((prev) => !prev);
+    };
 
     useEffect(() => {
         // Check if the user is logged in from localStorage or sessionStorage
@@ -35,23 +43,42 @@ export default function Navbar() {
                         >
                             Home
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             to="/about"
                             className={({ isActive }) =>
                                 isActive ? "text-white/95" : "text-white/75"
                             }
                         >
                             About
-                        </NavLink>
-                        {/* <NavLink
+                        </NavLink> */}
+                        <NavLink
                             to="/properties"
                             className={({ isActive }) =>
                                 isActive ? "text-white/95" : "text-white/75"
                             }
                         >
                             Properties
+                        </NavLink>
+                        {/* <NavLink
+                            to="/dashboard"
+                            className={({ isActive }) =>
+                                isActive ? "text-white/95" : "text-white/75"
+                            }
+                        >
+                            Dashboard
                         </NavLink> */}
+                        {/* Show dashboard only if user is logged in */}
                         {isLoggedIn && (
+                            <NavLink
+                                to="/dashboard"
+                                className={({ isActive }) =>
+                                    isActive ? "text-white/95" : "text-white/75"
+                                }
+                            >
+                                Dashboard
+                            </NavLink>
+                        )}
+                        {/* {isLoggedIn && (
                             <NavLink
                                 to="/properties"
                                 className={({ isActive }) =>
@@ -60,7 +87,7 @@ export default function Navbar() {
                             >
                                 Properties
                             </NavLink>
-                        )}
+                        )} */}
                         <NavLink
                             to="/contact"
                             className={({ isActive }) =>
@@ -85,8 +112,132 @@ export default function Navbar() {
                             </Link>
                         )}
                     </nav>
+
+
+                    {/* Hamburger Button */}
+                    <button
+                        className="block text-white md:hidden focus:outline-none"
+                        onClick={toggleMobileMenu}
+                    >
+                        <motion.span
+                            key={mobileMenuOpen ? "close" : "open"}
+                            initial={{ rotate: 0, opacity: 0 }}
+                            animate={{ rotate: mobileMenuOpen ? 180 : 0, opacity: 1 }}
+                            exit={{ rotate: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-xl"
+                        >
+                            {mobileMenuOpen ? "×" : "☰"}
+                        </motion.span>
+                    </button>
                 </div>
+
+                <AnimatePresence>
+                    {mobileMenuOpen && (
+                        <motion.div
+                            className="mt-2 mb-4 space-y-2 md:hidden h-fit"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <NavLink
+                                to="/"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-sm text-white/80 hover:text-white"
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                to="/properties"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-sm text-white/80 hover:text-white"
+                            >
+                                Properties
+                            </NavLink>
+                            <NavLink
+                                to="/dashboard"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-sm text-white/80 hover:text-white"
+                            >
+                                Dashboard
+                            </NavLink>
+                            <NavLink
+                                to="/contact"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-sm text-white/80 hover:text-white"
+                            >
+                                Contact
+                            </NavLink>
+
+                            {!isLoggedIn && !isLoginPage && !isSignupPage && (
+                                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                                    <Button variant="primary" size="sm" className="h-6 py-0 text-xs rounded-3xl">
+                                        Login
+                                    </Button>
+                                </Link>
+                            )}
+
+                            {isLoggedIn && (
+                                <Link to="/profile" onClick={() => setMobileMenuOpen(false)} title="Profile" className="text-lg text-white/70 hover:text-white">
+                                    {/* SF Symbol Fallback */}
+                                    <span role="img" aria-label="Profile">􀓤</span>
+                                </Link>
+                            )}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Mobile Menu */}
+                {/* {mobileMenuOpen && (
+                    <div className="mt-2 mb-4 space-y-2 md:hidden h-fit">
+                        <NavLink
+                            to="/"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block text-sm text-white/80 hover:text-white"
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to="/properties"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block text-sm text-white/80 hover:text-white"
+                        >
+                            Properties
+                        </NavLink>
+                        <NavLink
+                            to="/dashboard"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block text-sm text-white/80 hover:text-white"
+                        >
+                            Dashboard
+                        </NavLink>
+                        <NavLink
+                            to="/contact"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block text-sm text-white/80 hover:text-white"
+                        >
+                            Contact
+                        </NavLink>
+
+                        {!isLoggedIn && !isLoginPage && !isSignupPage && (
+                            <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                                <Button variant="primary" size="sm" className="h-6 py-0 text-xs rounded-3xl">
+                                    Login
+                                </Button>
+                            </Link>
+                        )}
+
+                        {isLoggedIn && (
+                            <Link to="/profile" onClick={() => setMobileMenuOpen(false)} title="Profile" className="text-lg text-white/70 hover:text-white">
+                                {/* SF Symbol Fallback */}
+                        {/* <span role="img" aria-label="Profile">􀓤</span>
+                    </Link>
+                )}
+
             </div>
-        </header>
+                )} /*/}
+        </div>
+        </header >
     );
 }
