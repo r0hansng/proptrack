@@ -53,7 +53,7 @@ const investedProperties = [
   },
 ];
 
-export default function PropertyListingPage() {
+const PropertyListingPage = () => {
   const [activeTab, setActiveTab] = useState('investNow');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -126,3 +126,5 @@ export default function PropertyListingPage() {
     </div>
   );
 }
+
+export default PropertyListingPage;

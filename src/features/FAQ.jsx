@@ -20,12 +20,12 @@ const faqItems = [
   },
 ];
 
-export default function FAQ() {
+const FAQ = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/5 text-white max-w-3xl mx-auto rounded-4xl">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-semibold mb-2">Frequently Asked Questions</h2>
-        <p className="text-sm text-white/50 max-w-2xl mx-auto">
+    <section className="max-w-3xl px-4 py-16 mx-auto text-white sm:px-6 lg:px-8 bg-white/5 rounded-4xl">
+      <div className="mb-12 text-center">
+        <h2 className="mb-2 text-3xl font-semibold">Frequently Asked Questions</h2>
+        <p className="max-w-2xl mx-auto text-sm text-white/50">
           Answers to common questions about the platform.
         </p>
       </div>
@@ -33,3 +33,5 @@ export default function FAQ() {
     </section>
   );
 }
+
+export default FAQ;

@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import routes from './routes/Routes.jsx';
 import './styles/globals.css';
 
-function App() {
+const App = () => {
   return (
     <>
       <RouterProvider router={routes} />

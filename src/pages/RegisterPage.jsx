@@ -3,7 +3,7 @@ import Button from '../components/UI/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import Toast from '../components/UI/Toast/Toast';
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 121 }, (_, i) => currentYear - i);
@@ -70,15 +70,15 @@ export default function RegisterPage() {
     <>
       <style>
         {`
-                    .scrollbar-hidden::-webkit-scrollbar {
-                        display: none;
-                    }
+          .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+          }
 
-                    .scrollbar-hidden {
-                        -ms-overflow-style: none;
-                        scrollbar-width: 0px;
-                    }
-                    `}
+          .scrollbar-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: 0px;
+          }
+        `}
       </style>
       <Toast title="Success" description="Account created successfully!" show={showToast} />
       <div className="min-h-screen flex items-center justify-center bg-[#1C1C1E] px-4">
@@ -326,3 +326,5 @@ export default function RegisterPage() {
     </>
   );
 }
+
+export default RegisterPage;

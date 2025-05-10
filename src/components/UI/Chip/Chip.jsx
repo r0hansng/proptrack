@@ -1,4 +1,3 @@
-// src/components/Chip/Chip.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cva } from 'class-variance-authority';
@@ -27,7 +26,7 @@ const chipVariants = cva(
   },
 );
 
-function Chip({ label, variant, size, icon: Icon, className }) {
+const Chip = ({ label, variant, size, icon: Icon, className }) => {
   return (
     <span className={cn(chipVariants({ variant, size, className }))}>
       {Icon && <Icon className="mr-1" />}

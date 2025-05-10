@@ -7,7 +7,7 @@ const NotFound = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="w-full max-w-xl p-6 text-center rounded-lg">
         <p className="mb-6 text-5xl font-semibold text-white">
-          The page you`&apos;`re looking for can`&apos;`t be found.
+          The page you&apos;re looking for can&apos;t be found.
         </p>
         <Button
           variant="link"

@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Navbar() {
+const Navbar = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -242,3 +242,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default Navbar;

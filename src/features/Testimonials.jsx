@@ -36,7 +36,7 @@ const getStars = (rating) => {
   return '􀋃'.repeat(fullStars) + (hasHalfStar ? '􀋄' : '');
 };
 
-export default function Testimonials() {
+const Testimonials = () => {
   return (
     <section className="bg-white/5 text-white py-16 mb-[10vw]">
       <h2 className="mb-8 text-3xl font-semibold text-center">What Our Users Say</h2>
@@ -49,7 +49,7 @@ export default function Testimonials() {
             <img src={t.photo} alt={t.name} className="object-cover mt-1 rounded-full w-14 h-14" />
             <div className="flex flex-col">
               <p className="mb-2 text-base italic leading-snug line-clamp-3 text-wrap">
-                `&ldquo;`{t.feedback}`&rdquo;`
+                &ldquo;{t.feedback}&rdquo;
               </p>
               <div className="text-sm text-yellow-400">{getStars(t.rating)}</div>
               <p className="mt-2 text-sm text-white/60">— {t.name}</p>
@@ -60,3 +60,5 @@ export default function Testimonials() {
     </section>
   );
 }
+
+export default Testimonials;

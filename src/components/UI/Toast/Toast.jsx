@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Toast({ title, description, show }) {
+const Toast = ({ title, description, show }) => {
   const [visible, setVisible] = useState(false);
   const [delayedVisible, setDelayedVisible] = useState(false);
 
@@ -53,3 +53,5 @@ Toast.propTypes = {
   description: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
 };
+
+export default Toast;

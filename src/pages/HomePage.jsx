@@ -8,7 +8,7 @@ import Testimonials from '../features/Testimonials';
 import { useNavigate } from 'react-router-dom';
 import Toast from '../components/UI/Toast/Toast';
 
-export default function HomePage() {
+const HomePage = () => {
   const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
 
@@ -152,3 +152,5 @@ export default function HomePage() {
     </>
   );
 }
+
+export default HomePage;

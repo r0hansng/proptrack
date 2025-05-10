@@ -212,7 +212,7 @@ const Dashboard = () => {
           </>
         ) : (
           <p className="text-sm text-gray-400">
-            No goal set. Click `&quot;`Set Goal`&quot;` to begin.
+            No goal set. Click &quot;Set Goal&quot; to begin.
           </p>
         )}
       </div>

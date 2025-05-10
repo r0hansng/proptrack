@@ -6,7 +6,7 @@ import Chip from '../UI/Chip/Chip';
 import Button from '../UI/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function PropertyCard({ property }) {
+const PropertyCard = ({ property }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -262,3 +262,5 @@ PropertyCard.propTypes = {
     description: PropTypes.string, // Optional description for modal content
   }).isRequired,
 };
+
+export default PropertyCard;

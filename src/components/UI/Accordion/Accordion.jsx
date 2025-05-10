@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Accordion({ items }) {
+const Accordion = ({ items }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -24,7 +24,7 @@ export default function Accordion({ items }) {
   );
 }
 
-function AccordionItem({ index, isOpen, question, answer, onToggle }) {
+const AccordionItem = ({ index, isOpen, question, answer, onToggle }) => {
   return (
     <div className="py-4 transition-all duration-700 ease-in-out border-b border-white/10">
       <button
@@ -62,3 +62,5 @@ Accordion.propTypes = {
     }),
   ).isRequired,
 };
+
+export default Accordion;

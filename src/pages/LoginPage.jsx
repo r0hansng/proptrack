@@ -5,7 +5,7 @@ import Toast from '../components/UI/Toast/Toast';
 import { Link } from 'react-router-dom';
 import Loader from '../components/UI/Loader/Loader';
 
-export default function LoginPage() {
+const LoginPage = () => {
   const [step, setStep] = useState('email');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -212,3 +212,5 @@ export default function LoginPage() {
     </>
   );
 }
+
+export default LoginPage;
