@@ -35,7 +35,7 @@ const routes = createBrowserRouter([
         path: '/properties',
         element: <PropertyListingPage />,
       },
-      //! The about page is not yet implemented but is included in the routes.
+      // The about page is not yet implemented but is included in the routes.
       {
         path: '/about',
         element: <AboutPage />,
@@ -46,7 +46,7 @@ const routes = createBrowserRouter([
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFound />, // Catch-all route for undefined paths
       },
     ],
   },
