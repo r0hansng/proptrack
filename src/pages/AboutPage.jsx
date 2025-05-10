@@ -1,5 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// ! This is not being used in the app yet. It is a work in progress.
+
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AboutPage() {
   return (
@@ -10,7 +12,8 @@ export default function AboutPage() {
           PropTrack. Clarity in Every Property.
         </h1>
         <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/70">
-          A reimagined way to explore and track your real estate investments — sleek, smart, and simulation-driven.
+          A reimagined way to explore and track your real estate investments — sleek, smart, and
+          simulation-driven.
         </p>
       </section>
 
@@ -18,8 +21,9 @@ export default function AboutPage() {
       <section className="bg-[#121212] px-6 md:px-24 py-24 text-center">
         <h2 className="mb-6 text-3xl font-semibold md:text-4xl">Why PropTrack Exists</h2>
         <p className="max-w-3xl mx-auto text-lg text-white/70 md:text-xl">
-          Real estate can be complex. We built PropTrack to bring simplicity and structure to investment tracking.
-          Whether you're exploring property investments or testing ideas, this platform helps you make smarter decisions — no clutter, no distractions.
+          Real estate can be complex. We built PropTrack to bring simplicity and structure to
+          investment tracking. Whether you`&apos;`re exploring property investments or testing
+          ideas, this platform helps you make smarter decisions — no clutter, no distractions.
         </p>
       </section>
 
@@ -38,11 +42,21 @@ export default function AboutPage() {
         <div className="bg-[#1A1A1A] p-10 rounded-3xl border border-white/10 shadow-xl transition-all hover:scale-[1.02] duration-300">
           <h3 className="mb-4 text-2xl font-medium">Tech That Empowers</h3>
           <div className="space-y-2 text-lg text-white/60">
-            <p><strong>Framework:</strong> React.js</p>
-            <p><strong>Design:</strong> Tailwind CSS</p>
-            <p><strong>APIs:</strong> LocationIQ, ExchangeRate.host</p>
-            <p><strong>State:</strong> Context API</p>
-            <p><strong>Hosting:</strong> Vercel</p>
+            <p>
+              <strong>Framework:</strong> React.js
+            </p>
+            <p>
+              <strong>Design:</strong> Tailwind CSS
+            </p>
+            <p>
+              <strong>APIs:</strong> LocationIQ, ExchangeRate.host
+            </p>
+            <p>
+              <strong>State:</strong> Context API
+            </p>
+            <p>
+              <strong>Hosting:</strong> Vercel
+            </p>
           </div>
         </div>
       </section>
@@ -50,7 +64,8 @@ export default function AboutPage() {
       {/* Visual Break */}
       <section className="bg-[#111111] text-center py-20 px-6">
         <blockquote className="max-w-4xl mx-auto text-2xl italic font-light md:text-3xl text-white/80">
-          "When we remove complexity, we uncover clarity. PropTrack helps you see real estate like never before."
+          `&rdquo;`When we remove complexity, we uncover clarity. PropTrack helps you see real
+          estate like never before.`&ldquo;`
         </blockquote>
       </section>
 
@@ -58,8 +73,9 @@ export default function AboutPage() {
       <section className="px-6 py-24 text-center bg-black md:px-24">
         <h2 className="mb-6 text-3xl font-semibold md:text-4xl">Crafted by Rohan</h2>
         <p className="max-w-3xl mx-auto text-lg text-white/70">
-          I’m a Computer Science student at Newton School of Technology, building tools that blend thoughtful UI with real-world utility.
-          PropTrack is more than a project — it's an exploration of what great design and technology can do when they meet real estate.
+          I’m a Computer Science student at Newton School of Technology, building tools that blend
+          thoughtful UI with real-world utility. PropTrack is more than a project — it`&apos;`s an
+          exploration of what great design and technology can do when they meet real estate.
         </p>
       </section>
 
@@ -67,7 +83,8 @@ export default function AboutPage() {
       <section className="bg-[#0e0e0e] text-center py-16 px-6">
         <h3 className="mb-2 text-xl font-medium">Disclaimer</h3>
         <p className="max-w-xl mx-auto text-white/60 text-md">
-          PropTrack is a frontend-only simulation tool for educational use. No real-time data or financial advice is provided. It's designed to experiment and learn.
+          PropTrack is a frontend-only simulation tool for educational use. No real-time data or
+          financial advice is provided. It`&apos;`s designed to experiment and learn.
         </p>
       </section>
 

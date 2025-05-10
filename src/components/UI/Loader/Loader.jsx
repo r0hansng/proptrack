@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Loader.module.css";
+import React from 'react';
+import styles from './Loader.module.css';
 
 const Loader = () => {
   return (
@@ -13,7 +13,7 @@ const Loader = () => {
               key={i}
               className={styles.blade}
               style={{
-                left: "50%",
+                left: '50%',
                 bottom: 0,
                 transform: `rotate(${angle}deg) translateY(-50%)`,
                 animationDelay: `${delay}s`,

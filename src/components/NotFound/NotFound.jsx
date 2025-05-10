@@ -5,12 +5,17 @@ import { Link } from 'react-router-dom';
 const NotFound = () => {
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="text-center p-6 rounded-lg max-w-xl w-full">
-        <p className="text-5xl text-white mb-6 font-semibold">
-          The page you're looking for can't be found.
+      <div className="w-full max-w-xl p-6 text-center rounded-lg">
+        <p className="mb-6 text-5xl font-semibold text-white">
+          The page you`&apos;`re looking for can`&apos;`t be found.
         </p>
-        <Button variant="link" className="text-lg text-[#0070c9] hover:text-none font-normal hover:underline">
-          <Link to="/">Go back to homepage <span className="text-xs">􀆊</span></Link>
+        <Button
+          variant="link"
+          className="text-lg text-[#0070c9] hover:text-none font-normal hover:underline"
+        >
+          <Link to="/">
+            Go back to homepage <span className="text-xs">􀆊</span>
+          </Link>
         </Button>
       </div>
     </div>

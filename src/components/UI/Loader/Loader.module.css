@@ -1,20 +1,19 @@
 .blade {
-    position: absolute;
-    width: 6px;       
-    height: 14px;    
-    border-radius: 6px;
-    background-color: #69717d;
+  position: absolute;
+  width: 6px;
+  height: 14px;
+  border-radius: 6px;
+  background-color: #69717d;
+  opacity: 0;
+  animation: fade-spinner 1s linear infinite;
+  transform-origin: center -15px;
+}
+
+@keyframes fade-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
     opacity: 0;
-    animation: fade-spinner 1s linear infinite;
-    transform-origin: center -15px; 
   }
-  
-  @keyframes fade-spinner {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  
+}
