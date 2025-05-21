@@ -143,7 +143,7 @@ const ContactPage = () => {
               <div>
                 <h2 className="mb-4 text-2xl font-semibold text-white">Contact Information</h2>
                 <p className="mb-6 text-white/80">
-                  We’d love to hear from you! Please fill out the form or reach us via:
+                  We&apos;d love to hear from you! Please fill out the form or reach us via:
                 </p>
                 <ul className="space-y-2 text-white/90">
                   <li>

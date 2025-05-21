@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 const Accordion = ({ items }) => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -33,7 +34,7 @@ const AccordionItem = ({ index, isOpen, question, answer, onToggle }) => {
       >
         <span>{question}</span>
         <span className="text-sm transition-transform duration-700 ease-in-out text-white/50">
-          {isOpen ? '􀆇' : '􀆈'}
+          {isOpen ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
         </span>
       </button>
       <div

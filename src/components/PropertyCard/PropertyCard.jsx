@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FaBed, FaBath } from 'react-icons/fa';
+import { FiBookmark, FiShare2, FiDownload, FiPhone } from 'react-icons/fi';
 import Chip from '../UI/Chip/Chip';
 import Button from '../UI/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -177,35 +178,40 @@ const PropertyCard = ({ property }) => {
                 e.stopPropagation();
                 toggleWishlist();
               }}
-              className="text-sm cursor-pointer"
+              className="cursor-pointer text-md"
             >
-              <span role="img" aria-label="wishlist">
-                {isWishlisted ? '􀉟' : '􀉞'}
-              </span>
+              {isWishlisted ? (
+                <FiBookmark className='text-amber-500' />
+              ) : (
+              <FiBookmark />
+              )}
             </button>
 
+            {/* Share button */}
             <button
               title="Share"
               onClick={(e) => e.stopPropagation()}
               className="cursor-pointer text-md"
             >
-              􀈂
+              <FiShare2 />
             </button>
 
+            {/* Download Report button */}
             <button
               title="Download Report"
               onClick={(e) => e.stopPropagation()}
               className="cursor-pointer text-md"
             >
-              􀁸
+              <FiDownload />
             </button>
 
+            {/* Schedule Call button */}
             <button
               title="Schedule Call"
               onClick={(e) => e.stopPropagation()}
               className="cursor-pointer text-md"
             >
-              􀒥
+              <FiPhone />
             </button>
           </div>
 

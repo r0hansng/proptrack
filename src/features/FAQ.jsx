@@ -1,6 +1,6 @@
 import React from 'react';
 import Accordion from '../components/UI/Accordion/Accordion';
-
+import { FiChevronDown } from 'react-icons/fi';
 const faqItems = [
   {
     question: 'Is this platform free to use?',

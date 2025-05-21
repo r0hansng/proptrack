@@ -1,5 +1,6 @@
 import React from 'react';
 import Marquee from '../components/UI/Marquee/Marquee';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 
 const testimonials = [
   {
@@ -29,11 +30,19 @@ const testimonials = [
   },
 ];
 
-// Converts rating into stars with full (􀋃) and half (􀋄) logic
+// Converts rating into stars with full and half star icons
 const getStars = (rating) => {
+  const stars = [];
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 !== 0;
-  return '􀋃'.repeat(fullStars) + (hasHalfStar ? '􀋄' : '');
+
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<FaStar key={`full-${i}`} />);
+  }
+  if (hasHalfStar) {
+    stars.push(<FaStarHalfAlt key="half" />);
+  }
+  return stars;
 };
 
 const Testimonials = () => {
@@ -51,7 +60,7 @@ const Testimonials = () => {
               <p className="mb-2 text-base italic leading-snug line-clamp-3 text-wrap">
                 &ldquo;{t.feedback}&rdquo;
               </p>
-              <div className="text-sm text-yellow-400">{getStars(t.rating)}</div>
+              <div className="flex gap-1 text-sm text-yellow-400">{getStars(t.rating)}</div>
               <p className="mt-2 text-sm text-white/60">— {t.name}</p>
             </div>
           </div>

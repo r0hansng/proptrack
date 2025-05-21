@@ -7,6 +7,7 @@ import HowItWorks from '../features/HowItWorks';
 import Testimonials from '../features/Testimonials';
 import { useNavigate } from 'react-router-dom';
 import Toast from '../components/UI/Toast/Toast';
+import { FiChevronRight } from 'react-icons/fi';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -142,8 +143,11 @@ const HomePage = () => {
               size="lg"
               className="mb-4 text-blue-500 hover:text-blue-500 hover:underline"
             >
-              <Link to="/register">
-                Register Now <span className="text-[0.65rem]">􀆊</span>
+              <Link 
+              to="/register"
+              className='flex items-center justify-center gap-1'
+              >
+                Register Now <FiChevronRight size={14} className='mt-0.5'/>
               </Link>
             </Button>
           </div>
