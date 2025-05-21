@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types'; 
 import {
   ResponsiveContainer,
   PieChart,
@@ -14,6 +13,7 @@ import {
   Cell,
 } from 'recharts';
 import Button from '../components/UI/Button/Button';
+import { investedProperties as data } from '../data/investedProperties.data';
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -36,35 +36,6 @@ const Dashboard = () => {
   const [goalInput, setGoalInput] = useState('');
 
   useEffect(() => {
-    const data = [
-      {
-        id: 101,
-        title: 'Lakeview Condo in Chicago',
-        location: 'Chicago, IL',
-        price: 950000,
-        investmentRequired: 150000,
-        ownershipShare: 30,
-        valueGrowth: [150000, 155000, 160000, 162000],
-      },
-      {
-        id: 102,
-        title: 'Oceanfront Villa in Miami',
-        location: 'Miami, FL',
-        price: 2000000,
-        investmentRequired: 250000,
-        ownershipShare: 50,
-        valueGrowth: [250000, 260000, 275000, 280000],
-      },
-      {
-        id: 103,
-        title: 'Modern Loft in San Francisco',
-        location: 'San Francisco, CA',
-        price: 1300000,
-        investmentRequired: 180000,
-        ownershipShare: 40,
-        valueGrowth: [180000, 185000, 187000, 190000],
-      },
-    ];
     setInvestedProperties(data);
   }, []);
 
@@ -86,14 +57,6 @@ const Dashboard = () => {
     name: p.title,
     investment: p.investmentRequired,
   }));
-
-  // const growthData = Array.from({ length: 4 }).map((_, i) => {
-  //     const obj = { name: `Month ${i + 1}` };
-  //     investedProperties.forEach((p) => {
-  //         obj[p.title] = p.valueGrowth?.[i] || 0;
-  //     });
-  //     return obj;
-  // });
 
   const topPerformingProperties = investedProperties
     .map((p) => {

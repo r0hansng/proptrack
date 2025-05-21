@@ -5,39 +5,17 @@ import { FaBed, FaBath } from 'react-icons/fa';
 import Chip from '../UI/Chip/Chip';
 import Button from '../UI/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
+import useWishlist from '../../hooks/useWishlisted';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 const PropertyCard = ({ property }) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { isWishlisted, toggleWishlist } = useWishlist(property.id);
   const [showModal, setShowModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(null); // Added for dynamic modal content
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('wishlist') || '{}');
-    setIsWishlisted(!!saved[property.id]);
-  }, [property.id]);
-
-  const toggleWishlist = () => {
-    const saved = JSON.parse(localStorage.getItem('wishlist') || '{}');
-    const updated = {
-      ...saved,
-      [property.id]: !isWishlisted,
-    };
-    localStorage.setItem('wishlist', JSON.stringify(updated));
-    setIsWishlisted(!isWishlisted);
-  };
-
-  const formattedPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(property.price);
-
-  const formattedInvestment = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(property.investmentRequired);
+  const formattedPrice = formatCurrency(property.price, 'USD', 'en-US', 0);
+  const formattedInvestment = formatCurrency(property.investmentRequired, 'USD', 'en-US', 0);
 
   const openModal = (property) => {
     setSelectedProperty(property); // Set selected property for modal
@@ -259,7 +237,7 @@ PropertyCard.propTypes = {
     furnishing: PropTypes.string.isRequired,
     ownershipShare: PropTypes.number.isRequired,
     leaseTerms: PropTypes.string.isRequired,
-    description: PropTypes.string, // Optional description for modal content
+    description: PropTypes.string,
   }).isRequired,
 };
 
