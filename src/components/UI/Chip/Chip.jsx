@@ -10,7 +10,7 @@ const chipVariants = cva(
       variant: {
         primary: 'bg-gray-300 text-gray-800',
         secondary: 'bg-gray-600 text-white',
-        tertiary: 'bg-gray-900 text-white', // Green
+        tertiary: 'bg-gray-900 text-white',
       },
       size: {
         default: 'text-sm px-3 py-1.5',

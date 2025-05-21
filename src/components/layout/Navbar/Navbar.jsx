@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
   useEffect(() => {
-    // Check if the user is logged in from localStorage or sessionStorage
     const user =
       JSON.parse(localStorage.getItem('proptrack_user')) ||
       JSON.parse(sessionStorage.getItem('proptrack_user'));
 
     setIsLoggedIn(user?.isLoggedIn || false);
   }, []);
+
+  useEffect(() => {
+    if (showLogoutModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showLogoutModal]);
+
+  const logout = () => {
+    localStorage.removeItem('proptrack_user');
+    sessionStorage.removeItem('proptrack_user');
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/register';
@@ -38,29 +58,12 @@ const Navbar = () => {
             >
               Home
             </NavLink>
-            {/* <NavLink
-                            to="/about"
-                            className={({ isActive }) =>
-                                isActive ? "text-white/95" : "text-white/75"
-                            }
-                        >
-                            About
-                        </NavLink> */}
             <NavLink
               to="/properties"
               className={({ isActive }) => (isActive ? 'text-white/95' : 'text-white/75')}
             >
               Properties
             </NavLink>
-            {/* <NavLink
-                            to="/dashboard"
-                            className={({ isActive }) =>
-                                isActive ? "text-white/95" : "text-white/75"
-                            }
-                        >
-                            Dashboard
-                        </NavLink> */}
-            {/* Show dashboard only if user is logged in */}
             {isLoggedIn && (
               <NavLink
                 to="/dashboard"
@@ -69,16 +72,6 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
             )}
-            {/* {isLoggedIn && (
-                            <NavLink
-                                to="/properties"
-                                className={({ isActive }) =>
-                                    isActive ? "text-white/95" : "text-white/75"
-                                }
-                            >
-                                Properties
-                            </NavLink>
-                        )} */}
             <NavLink
               to="/contact"
               className={({ isActive }) => (isActive ? 'text-white/95' : 'text-white/75')}
@@ -95,20 +88,17 @@ const Navbar = () => {
             )}
 
             {isLoggedIn && (
-              <Link
-                to="/profile"
-                title="Profile"
-                className="text-lg text-white/70 hover:text-white"
+              <Button
+                variant="destructive"
+                size="sm"
+                className="flex items-center justify-center h-6 py-0 text-xs rounded-3xl"
+                onClick={() => setShowLogoutModal(true)}
               >
-                {/* SF Symbol Fallback */}
-                <span role="img" aria-label="Profile">
-                  􀓤
-                </span>
-              </Link>
+                Logout
+              </Button>
             )}
           </nav>
 
-          {/* Hamburger Button */}
           <button
             className="block text-white md:hidden focus:outline-none"
             onClick={toggleMobileMenu}
@@ -149,13 +139,15 @@ const Navbar = () => {
               >
                 Properties
               </NavLink>
-              <NavLink
-                to="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-white/80 hover:text-white"
-              >
-                Dashboard
-              </NavLink>
+              {isLoggedIn && (
+                <NavLink
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-sm text-white/80 hover:text-white"
+                >
+                  Dashboard
+                </NavLink>
+              )}
               <NavLink
                 to="/contact"
                 onClick={() => setMobileMenuOpen(false)}
@@ -173,71 +165,61 @@ const Navbar = () => {
               )}
 
               {isLoggedIn && (
-                <Link
-                  to="/profile"
-                  onClick={() => setMobileMenuOpen(false)}
-                  title="Profile"
-                  className="text-lg text-white/70 hover:text-white"
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="h-6 py-0 text-xs rounded-3xl"
+                  onClick={() => {
+                    setShowLogoutModal(true);
+                    setMobileMenuOpen(false);
+                  }}
                 >
-                  {/* SF Symbol Fallback */}
-                  <span role="img" aria-label="Profile">
-                    􀓤
-                  </span>
-                </Link>
+                  Logout
+                </Button>
               )}
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Mobile Menu */}
-        {/* {mobileMenuOpen && (
-                    <div className="mt-2 mb-4 space-y-2 md:hidden h-fit">
-                        <NavLink
-                            to="/"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-sm text-white/80 hover:text-white"
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink
-                            to="/properties"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-sm text-white/80 hover:text-white"
-                        >
-                            Properties
-                        </NavLink>
-                        <NavLink
-                            to="/dashboard"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-sm text-white/80 hover:text-white"
-                        >
-                            Dashboard
-                        </NavLink>
-                        <NavLink
-                            to="/contact"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-sm text-white/80 hover:text-white"
-                        >
-                            Contact
-                        </NavLink>
+        {/* Logout Confirmation Modal */}
+        <AnimatePresence>
+          {showLogoutModal && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* Background overlay */}
+              <div className="absolute inset-0 border bg-black/40 /backdrop-blur-xl" />
 
-                        {!isLoggedIn && !isLoginPage && !isSignupPage && (
-                            <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                                <Button variant="primary" size="sm" className="h-6 py-0 text-xs rounded-3xl">
-                                    Login
-                                </Button>
-                            </Link>
-                        )}
-
-                        {isLoggedIn && (
-                            <Link to="/profile" onClick={() => setMobileMenuOpen(false)} title="Profile" className="text-lg text-white/70 hover:text-white">
-                                {/* SF Symbol Fallback */}
-        {/* <span role="img" aria-label="Profile">􀓤</span>
-                    </Link>
-                )}
-
-            </div>
-                )} /*/}
+              {/* Modal box */}
+              <motion.div
+                className="z-10 bg-white/5 rounded-xl shadow-xl p-6 w-[90%] max-w-sm translate-y-[-50%] top-[15vh] absolute border-white/20 border"
+                initial={{ scale: 0.9, y: -20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: -20 }}
+                transition={{ duration: 0.25 }}
+              >
+                <h2 className="mb-2 text-lg font-semibold text-white">Confirm Logout</h2>
+                <p className="mb-6 text-sm text-white/70">Are you sure you want to log out?</p>
+                <div className="flex justify-end gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-blue-500 border-blue-500/60 hover:bg-blue-500/40"
+                    onClick={() => setShowLogoutModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button variant="destructive" size="sm" onClick={logout}>
+                    Logout
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

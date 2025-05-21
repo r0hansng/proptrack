@@ -19,22 +19,21 @@ const PropertyCard = ({ property }) => {
   const formattedInvestment = formatCurrency(property.investmentRequired, 'USD', 'en-US', 0);
 
   const openModal = (property) => {
-    setSelectedProperty(property); // Set selected property for modal
+    setSelectedProperty(property);
     setShowModal(true);
   };
   const closeModal = () => {
     setShowModal(false);
-    setSelectedProperty(null); // Reset selected property when modal is closed
+    setSelectedProperty(null);
   };
 
   return (
     <div
       className="relative overflow-hidden transition-all duration-200 border border-gray-200 shadow-sm cursor-pointer rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-white/10 dark:border-white/10 hover:scale-102 hover:shadow-md"
-      onClick={() => openModal(property)} // Pass the property to open the modal
+      onClick={() => openModal(property)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Modal with dynamic content */}
       <AnimatePresence>
         {showModal && selectedProperty && (
           <motion.div
@@ -51,7 +50,7 @@ const PropertyCard = ({ property }) => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()} // Prevent modal close on content click
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={closeModal}
@@ -65,7 +64,6 @@ const PropertyCard = ({ property }) => {
                 {selectedProperty.description || 'No description available.'}
               </p>
 
-              {/* Display Property Details */}
               <div className="mt-4">
                 <h3 className="text-lg font-semibold">Investment Details</h3>
                 <p>
@@ -100,14 +98,11 @@ const PropertyCard = ({ property }) => {
                   <strong>Furnishing:</strong> {selectedProperty.furnishing}
                 </p>
               </div>
-
-              {/* Add more dynamic property-related content as needed */}
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Image and Know More Button */}
       <div className="relative p-4">
         <img
           src={property.imageUrl}
@@ -127,7 +122,7 @@ const PropertyCard = ({ property }) => {
               variant="secondary"
               onClick={(e) => {
                 e.stopPropagation();
-                openModal(property); // Pass the property to open the modal
+                openModal(property);
               }}
               className="text-white duration-500 bg-black shadow-lg rounded-3xl hover:bg-blue-500"
             >
@@ -137,7 +132,6 @@ const PropertyCard = ({ property }) => {
         )}
       </div>
 
-      {/* Property Details */}
       <div className="p-4 space-y-2 text-gray-800 dark:text-white">
         <h2 className="text-xl font-semibold">{property.title}</h2>
         <p className="text-sm text-gray-600 dark:text-white/60">
@@ -169,7 +163,6 @@ const PropertyCard = ({ property }) => {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex items-center justify-between gap-2 mt-4">
           <div className="flex items-center gap-2">
             <button
@@ -183,11 +176,10 @@ const PropertyCard = ({ property }) => {
               {isWishlisted ? (
                 <FiBookmark className='text-amber-500' />
               ) : (
-              <FiBookmark />
+                <FiBookmark />
               )}
             </button>
 
-            {/* Share button */}
             <button
               title="Share"
               onClick={(e) => e.stopPropagation()}
@@ -196,7 +188,6 @@ const PropertyCard = ({ property }) => {
               <FiShare2 />
             </button>
 
-            {/* Download Report button */}
             <button
               title="Download Report"
               onClick={(e) => e.stopPropagation()}
@@ -205,7 +196,6 @@ const PropertyCard = ({ property }) => {
               <FiDownload />
             </button>
 
-            {/* Schedule Call button */}
             <button
               title="Schedule Call"
               onClick={(e) => e.stopPropagation()}
@@ -214,7 +204,6 @@ const PropertyCard = ({ property }) => {
               <FiPhone />
             </button>
           </div>
-
           <div className="ml-auto">
             <Link className="w-full">
               <Button variant="primary" size="sm" className="font-normal rounded-lg">
