@@ -11,6 +11,6 @@ const AppLayout = () => {
       <Footer />
     </>
   );
-}
+};
 
 export default AppLayout;

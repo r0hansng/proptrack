@@ -107,9 +107,15 @@ const Dashboard = () => {
     .slice(0, 3);
 
   const recentActivities = [
-    { message: 'Added Oceanfront Villa in Miami to your portfolio', isGrowth: null },
+    {
+      message: 'Added Oceanfront Villa in Miami to your portfolio',
+      isGrowth: null,
+    },
     { message: 'Lakeview Condo value increased by $12,000', isGrowth: true },
-    { message: 'Modern Loft in San Francisco value decreased by $3,000', isGrowth: false },
+    {
+      message: 'Modern Loft in San Francisco value decreased by $3,000',
+      isGrowth: false,
+    },
     { message: 'Invested $50,000 in Oceanfront Villa', isGrowth: null },
   ];
 
@@ -171,7 +177,10 @@ const Dashboard = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 gap-6 mb-12 md:grid-cols-3">
         {[
-          { label: 'Total Investment', value: `$${totalInvestment.toLocaleString()}` },
+          {
+            label: 'Total Investment',
+            value: `$${totalInvestment.toLocaleString()}`,
+          },
           { label: 'Average Ownership', value: `${avgOwnership.toFixed(1)}%` },
           { label: 'Properties Invested', value: investedProperties.length },
         ].map((card, i) => (
@@ -211,9 +220,7 @@ const Dashboard = () => {
             )}
           </>
         ) : (
-          <p className="text-sm text-gray-400">
-            No goal set. Click &quot;Set Goal&quot; to begin.
-          </p>
+          <p className="text-sm text-gray-400">No goal set. Click &quot;Set Goal&quot; to begin.</p>
         )}
       </div>
 

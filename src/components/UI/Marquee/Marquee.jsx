@@ -24,7 +24,7 @@ const Marquee = ({ children, speed = 30 }) => {
       </style>
     </div>
   );
-}
+};
 
 Marquee.propTypes = {
   children: PropTypes.node.isRequired,

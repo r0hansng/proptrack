@@ -242,7 +242,7 @@ const PropertyCard = ({ property }) => {
       </div>
     </div>
   );
-}
+};
 
 PropertyCard.propTypes = {
   property: PropTypes.shape({

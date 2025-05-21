@@ -33,7 +33,7 @@ const Chip = ({ label, variant, size, icon: Icon, className }) => {
       {label}
     </span>
   );
-}
+};
 
 export default Chip;
 

@@ -46,7 +46,7 @@ const Toast = ({ title, description, show }) => {
       )}
     </>
   );
-}
+};
 
 Toast.propTypes = {
   title: PropTypes.string.isRequired,

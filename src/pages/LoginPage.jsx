@@ -12,7 +12,10 @@ const LoginPage = () => {
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [toastContent, setToastContent] = useState({ title: '', description: '' });
+  const [toastContent, setToastContent] = useState({
+    title: '',
+    description: '',
+  });
 
   const [storedUser, setStoredUser] = useState(null);
 
@@ -211,6 +214,6 @@ const LoginPage = () => {
       </div>
     </>
   );
-}
+};
 
 export default LoginPage;

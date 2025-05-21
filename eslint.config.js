@@ -11,6 +11,7 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
     rules: {
       'no-unused-vars': 'off',
+      'react/prop-types': 'warn',
     },
   },
   pluginReact.configs.flat.recommended,

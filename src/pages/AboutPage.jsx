@@ -22,8 +22,8 @@ const AboutPage = () => {
         <h2 className="mb-6 text-3xl font-semibold md:text-4xl">Why PropTrack Exists</h2>
         <p className="max-w-3xl mx-auto text-lg text-white/70 md:text-xl">
           Real estate can be complex. We built PropTrack to bring simplicity and structure to
-          investment tracking. Whether you&apos;re exploring property investments or testing
-          ideas, this platform helps you make smarter decisions — no clutter, no distractions.
+          investment tracking. Whether you&apos;re exploring property investments or testing ideas,
+          this platform helps you make smarter decisions — no clutter, no distractions.
         </p>
       </section>
 
@@ -64,8 +64,8 @@ const AboutPage = () => {
       {/* Visual Break */}
       <section className="bg-[#111111] text-center py-20 px-6">
         <blockquote className="max-w-4xl mx-auto text-2xl italic font-light md:text-3xl text-white/80">
-          &rdquo;When we remove complexity, we uncover clarity. PropTrack helps you see real
-          estate like never before.&ldquo;
+          &rdquo;When we remove complexity, we uncover clarity. PropTrack helps you see real estate
+          like never before.&ldquo;
         </blockquote>
       </section>
 
@@ -73,9 +73,9 @@ const AboutPage = () => {
       <section className="px-6 py-24 text-center bg-black md:px-24">
         <h2 className="mb-6 text-3xl font-semibold md:text-4xl">Crafted by Rohan</h2>
         <p className="max-w-3xl mx-auto text-lg text-white/70">
-          I&apos;m a Computer Science student at Newton School of Technology, building tools that blend
-          thoughtful UI with real-world utility. PropTrack is more than a project — it&apos;s an
-          exploration of what great design and technology can do when they meet real estate.
+          I&apos;m a Computer Science student at Newton School of Technology, building tools that
+          blend thoughtful UI with real-world utility. PropTrack is more than a project — it&apos;s
+          an exploration of what great design and technology can do when they meet real estate.
         </p>
       </section>
 
@@ -99,6 +99,6 @@ const AboutPage = () => {
       </section>
     </div>
   );
-}
+};
 
 export default AboutPage;

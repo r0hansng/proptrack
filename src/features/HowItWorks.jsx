@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HowItWorks = () =>{
+const HowItWorks = () => {
   return (
     <section className="px-4 py-16 mx-auto mt-16 text-white sm:px-6 lg:px-8 bg-white/5">
       <div className="mb-12 text-center">
@@ -54,7 +54,6 @@ const HowItWorks = () =>{
       </div>
     </section>
   );
-}
-
+};
 
 export default HowItWorks;

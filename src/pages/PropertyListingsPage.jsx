@@ -125,6 +125,6 @@ const PropertyListingPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default PropertyListingPage;

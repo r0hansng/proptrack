@@ -59,6 +59,6 @@ const Testimonials = () => {
       </Marquee>
     </section>
   );
-}
+};
 
 export default Testimonials;

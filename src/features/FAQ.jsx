@@ -32,6 +32,6 @@ const FAQ = () => {
       <Accordion items={faqItems} />
     </section>
   );
-}
+};
 
 export default FAQ;

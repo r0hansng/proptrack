@@ -22,7 +22,7 @@ const Accordion = ({ items }) => {
       ))}
     </div>
   );
-}
+};
 
 const AccordionItem = ({ index, isOpen, question, answer, onToggle }) => {
   return (
@@ -38,13 +38,16 @@ const AccordionItem = ({ index, isOpen, question, answer, onToggle }) => {
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}
-        style={{ transition: 'max-height 0.3s ease-in-out', maxHeight: isOpen ? '400px' : '0' }}
+        style={{
+          transition: 'max-height 0.3s ease-in-out',
+          maxHeight: isOpen ? '400px' : '0',
+        }}
       >
         <div className="mt-2 text-base text-white/70">{answer}</div>
       </div>
     </div>
   );
-}
+};
 
 AccordionItem.propTypes = {
   index: PropTypes.number.isRequired,

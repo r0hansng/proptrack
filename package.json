@@ -1,7 +1,7 @@
 {
   "name": "proptrack",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0-rc.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,7 +13,6 @@
     "@tailwindcss/vite": "^4.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotenv": "^16.5.0",
     "framer-motion": "^12.10.5",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
