@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../components/UI/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import Toast from '../components/UI/Toast/Toast';
+import Input from '../components/UI/Input/Input';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -95,23 +96,19 @@ const RegisterPage = () => {
             </p>
             <form className="flex flex-col flex-grow space-y-4" onSubmit={handleSubmit}>
               <div className="flex sm:gap-4">
-                <input
+                <Input
                   type="text"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder="First Name"
-                  className="w-full placeholder:text-white/40 focus:placeholder-transparent appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
                 />
-                <input
+                <Input
                   type="text"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   placeholder="Last Name"
-                  className="placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
                 />
               </div>
 
@@ -217,70 +214,60 @@ const RegisterPage = () => {
                   </div>
                 </div>
               </div>
-
-              <input
+              <Input
+                type="text"
                 name="address1"
                 value={formData.address1}
                 onChange={handleChange}
                 placeholder="Address Line 1"
-                className="mt-2 mb-[0.5rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
-              <input
+              <Input
+                type="text"
                 name="address2"
                 value={formData.address2}
                 onChange={handleChange}
                 placeholder="Address Line 2 (Optional)"
-                className="mt-2 mb-[0.5rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required={false}
               />
-
               <hr className="mt-2 text-white/15" />
 
-              <input
+              <Input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="name@example.com"
-                className="mt-2 mb-[0.5rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
 
               <label className="text-xs text-white/70">
                 This will be your new PropTrack Account.
               </label>
 
-              <input
+              <Input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-2 mb-[0.5rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
-              <input
+
+              <Input
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-2 mb-[1rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
 
               {passwordError && <p className="text-sm text-red-500">{passwordError}</p>}
 
               <hr className="text-white/15" />
-
-              <input
+              <Input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone Number"
-                className="mt-2 mb-[0.5rem] placeholder:text-white/40 focus:placeholder-transparent w-full appearance-none px-4 py-3 bg-[#252527] border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 pattern="[0-9]{10}"
                 title="Enter a valid 10-digit phone number"
-                required
               />
               <div className="mt-8 text-xs text-center text-white/60">
                 <img
@@ -289,11 +276,7 @@ const RegisterPage = () => {
                   className="w-8 h-8 mx-auto mb-4"
                 />
                 <p>
-                  Your PropTrack Account information is used to allow you to sign in securely and
-                  access your data. PropTrack records certain data for security, support, and
-                  reporting purposes. If you agree, PropTrack may also use your account information
-                  to send you marketing emails and communications, including those based on your use
-                  of PropTrack services.
+                  Your PropTrack Account information is used to allow you to sign in securely and access your data PropTrack records certain data for security, support, and reporting purposes. If you agree PropTrack may also use your account information to send you marketing emails and communications including those based on your use of PropTrack services.
                 </p>
               </div>
               <div className="flex flex-wrap justify-between w-full gap-4 mt-6 rounded-b-2xl">
@@ -319,8 +302,6 @@ const RegisterPage = () => {
               </div>
             </form>
           </div>
-
-          {/* Move the buttons outside of the form */}
         </div>
       </div>
     </>

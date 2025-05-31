@@ -4,6 +4,7 @@ import Button from '../components/UI/Button/Button';
 import Toast from '../components/UI/Toast/Toast';
 import { Link } from 'react-router-dom';
 import Loader from '../components/UI/Loader/Loader';
+import Input from '../components/UI/Input/Input';
 
 const LoginPage = () => {
   const [step, setStep] = useState('email');
@@ -52,13 +53,12 @@ const LoginPage = () => {
       return;
     }
 
-    // If the user is found, set the storedUser and move to password step
     setStoredUser(user);
     setStep('password');
     setShowTooltip(false);
   };
 
-  const [isLoading, setIsLoading] = useState(false); // Add state for loader
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = () => {
     if (!storedUser || storedUser.password !== password) {
@@ -89,7 +89,6 @@ const LoginPage = () => {
     });
     setShowToast(true);
 
-    // Show loader and redirect after a delay
     setIsLoading(true);
     setTimeout(() => {
       setShowToast(false);
@@ -110,27 +109,23 @@ const LoginPage = () => {
 
           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="relative">
-              <input
+              <Input
                 type="email"
                 placeholder="Email"
-                className={`w-full px-4 py-2 pr-12 border ${
-                  showTooltip ? 'border-red-500' : 'border-white/30'
-                } rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#252527] text-white placeholder:text-white/40
-                                    mt-4 /mb-[0.5rem] w-full appearance-none px-4 py-3 border border-white/20`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className={`pr-12 mt-4 ${showTooltip ? 'border-red-500' : ''}`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
                     handleEmailSubmit();
                   }
-                }}
-              />
+                }} />
               {step === 'email' && (
                 <button
                   type="button"
                   onClick={handleEmailSubmit}
-                  className="absolute inset-y-0 flex items-center text-2xl font-light right-3 text-white/20"
+                  className="absolute inset-y-0 flex items-center text-2xl font-light top-3 right-3 text-white/20"
                   title="Next"
                 >
                   􁾤
@@ -192,9 +187,8 @@ const LoginPage = () => {
                 onClick={() => setKeepLoggedIn(!keepLoggedIn)}
               >
                 <div
-                  className={`h-4 w-4 rounded-xs border border-white/30 flex items-center justify-center ${
-                    keepLoggedIn ? 'bg-blue-500' : 'bg-[#1C1C1E]'
-                  }`}
+                  className={`h-4 w-4 rounded-xs border border-white/30 flex items-center justify-center ${keepLoggedIn ? 'bg-blue-500' : 'bg-[#1C1C1E]'
+                    }`}
                 >
                   {keepLoggedIn && <span className="text-xs text-white">􀆅</span>}
                 </div>
