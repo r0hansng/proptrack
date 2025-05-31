@@ -1,100 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../components/UI/Button/Button';
 import Toast from '../components/UI/Toast/Toast';
 import { Link } from 'react-router-dom';
 import Loader from '../components/UI/Loader/Loader';
 import Input from '../components/UI/Input/Input';
+import { useLoginForm } from '../hooks/useLoginForm';
 
 const LoginPage = () => {
-  const [step, setStep] = useState('email');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-  const [toastContent, setToastContent] = useState({
-    title: '',
-    description: '',
-  });
-
-  const [storedUser, setStoredUser] = useState(null);
-
-  useEffect(() => {
-    const sessionUser =
-      JSON.parse(localStorage.getItem('proptrack_user')) ||
-      JSON.parse(sessionStorage.getItem('proptrack_user'));
-
-    if (sessionUser?.isLoggedIn) {
-      window.location.href = '/';
-    }
-  }, []);
-
-  const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
-
-  const handleEmailSubmit = () => {
-    if (!isValidEmail(email)) {
-      setShowTooltip(true);
-      setTimeout(() => setShowTooltip(false), 3000);
-      return;
-    }
-
-    // Retrieve the registered user from localStorage
-    const user = JSON.parse(localStorage.getItem('userData'));
-
-    // Check if the user exists and the email matches
-    if (!user || user.email !== email) {
-      setToastContent({
-        title: 'User Not Found',
-        description: 'Please register before logging in.',
-      });
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500);
-      return;
-    }
-
-    setStoredUser(user);
-    setStep('password');
-    setShowTooltip(false);
-  };
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleFormSubmit = () => {
-    if (!storedUser || storedUser.password !== password) {
-      setToastContent({
-        title: 'Incorrect Password',
-        description: 'The password you entered is incorrect.',
-      });
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500);
-      return;
-    }
-
-    const loginSession = {
-      ...storedUser,
-      isLoggedIn: true,
-      keepLoggedIn,
-    };
-
-    if (keepLoggedIn) {
-      localStorage.setItem('proptrack_user', JSON.stringify(loginSession));
-    } else {
-      sessionStorage.setItem('proptrack_user', JSON.stringify(loginSession));
-    }
-
-    setToastContent({
-      title: 'Logged In',
-      description: 'Welcome back!',
-    });
-    setShowToast(true);
-
-    setIsLoading(true);
-    setTimeout(() => {
-      setShowToast(false);
-      window.location.href = '/';
-    }, 1500);
-  };
+  const {
+    step,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    keepLoggedIn,
+    setKeepLoggedIn,
+    showTooltip,
+    showToast,
+    toastContent,
+    isLoading,
+    handleEmailSubmit,
+    handleFormSubmit,
+  } = useLoginForm();
 
   return (
     <>
@@ -120,7 +48,8 @@ const LoginPage = () => {
                     e.preventDefault();
                     handleEmailSubmit();
                   }
-                }} />
+                }}
+              />
               {step === 'email' && (
                 <button
                   type="button"
@@ -187,8 +116,9 @@ const LoginPage = () => {
                 onClick={() => setKeepLoggedIn(!keepLoggedIn)}
               >
                 <div
-                  className={`h-4 w-4 rounded-xs border border-white/30 flex items-center justify-center ${keepLoggedIn ? 'bg-blue-500' : 'bg-[#1C1C1E]'
-                    }`}
+                  className={`h-4 w-4 rounded-xs border border-white/30 flex items-center justify-center ${
+                    keepLoggedIn ? 'bg-blue-500' : 'bg-[#1C1C1E]'
+                  }`}
                 >
                   {keepLoggedIn && <span className="text-xs text-white">􀆅</span>}
                 </div>
