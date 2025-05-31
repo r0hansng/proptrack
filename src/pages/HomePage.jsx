@@ -8,6 +8,7 @@ import Testimonials from '../features/Testimonials';
 import { useNavigate } from 'react-router-dom';
 import Toast from '../components/UI/Toast/Toast';
 import { FiChevronRight } from 'react-icons/fi';
+import styles from "../styles/home.module.css"
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -42,21 +43,6 @@ const HomePage = () => {
         description="Please log in to use the application."
         show={showToast}
       />
-      <style>
-        {`
-        .gradient-text {
-            color: #ffffff;
-            font-weight: 700;
-            text-shadow:
-                0 -4px 8px #CE7E4F,     /* warm top glow */
-                0 4px 8px #1B66FA,      /* cool bottom glow */
-                0 0 5px #ffffff,        /* strong white center glow */
-                0 0 30px rgba(255,255,255,0.1),  /* ambient aura with a darker edge */
-                0 0px 30px rgba(255,140,0,1); 
-        }
-    `}
-      </style>
-
       <div className="relative overflow-hidden text-white bg-black">
         {/* Hero Section */}
         <section
@@ -67,17 +53,12 @@ const HomePage = () => {
           <div className="relative z-10 px-4 text-center sm:px-6 lg:px-8">
             <h1 className="mb-4 text-3xl font-bold leading-tight sm:text-5xl">
               Transforming the way you invest in property <br />
-              <span className="gradient-text">Simple. Elegant. Powerful.</span>
+              <span className={`${styles['gradient-text']}`}>Simple. Elegant. Powerful.</span>
             </h1>
             <p className="max-w-2xl mx-auto mb-6 text-lg sm:text-xl text-white/80">
               Invest with ease. Experience a new era of property management, where simplicity meets
               sophistication.
             </p>
-            {/* <Link to="/properties">
-                            <Button variant="primary" size="default" className="h-10 mt-10 text-lg rounded-3xl">
-                                Use
-                            </Button>
-                        </Link> */}
             <Button
               variant="primary"
               size="default"
@@ -90,7 +71,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Section Below Hero */}
         <div className="relative py-20">
           <div className="relative z-10">
             <HowItWorks />
@@ -143,11 +123,11 @@ const HomePage = () => {
               size="lg"
               className="mb-4 text-blue-500 hover:text-blue-500 hover:underline"
             >
-              <Link 
-              to="/register"
-              className='flex items-center justify-center gap-1'
+              <Link
+                to="/register"
+                className='flex items-center justify-center gap-1'
               >
-                Register Now <FiChevronRight size={14} className='mt-0.5'/>
+                Register Now <FiChevronRight size={14} className='mt-0.5' />
               </Link>
             </Button>
           </div>

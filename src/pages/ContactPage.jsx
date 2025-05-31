@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/UI/Button/Button';
 import Toast from '../components/UI/Toast/Toast';
+import styles from "../styles/contact.module.css"
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -35,109 +36,31 @@ const ContactPage = () => {
 
   return (
     <>
-      <style>
-        {`
-                    @keyframes random-move-1 {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        25% {
-                            transform: translate(50vw, -30vh);
-                        }
-                        50% {
-                            transform: translate(-40vw, 40vh);
-                        }
-                        75% {
-                            transform: translate(30vw, 20vh);
-                        }
-                        100% {
-                            transform: translate(0, 0);
-                        }
-                    }
-
-                    @keyframes random-move-2 {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        25% {
-                            transform: translate(-30vw, 40vh);
-                        }
-                        50% {
-                            transform: translate(40vw, -20vh);
-                        }
-                        75% {
-                            transform: translate(-20vw, -30vh);
-                        }
-                        100% {
-                            transform: translate(0, 0);
-                        }
-                    }
-
-                    @keyframes random-move-3 {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        25% {
-                            transform: translate(20vw, 30vh);
-                        }
-                        50% {
-                            transform: translate(-50vw, -40vh);
-                        }
-                        75% {
-                            transform: translate(40vw, 10vh);
-                        }
-                        100% {
-                            transform: translate(0, 0);
-                        }
-                    }
-
-                    .animate-random-move-1 {
-                        animation: random-move-1 12s infinite alternate ease-in-out;
-                        position: absolute;
-                        z-index: 0;
-                    }
-
-                    .animate-random-move-2 {
-                        animation: random-move-2 15s infinite alternate ease-in-out;
-                        position: absolute;
-                        z-index: 0;
-                    }
-
-                    .animate-random-move-3 {
-                        animation: random-move-3 18s infinite alternate ease-in-out;
-                        position: absolute;
-                        z-index: 0;
-                    }
-                `}
-      </style>
-
       <Toast title="Message Sent" description={toastMessage} show={showToast} />
 
       <div className="relative flex items-center justify-center min-h-screen px-4 py-12 overflow-hidden bg-black">
-        {/* Randomly moving glowing circles */}
         <div
-          className="bg-blue-100 rounded-full animate-random-move-1 w-96 h-96 blur-3xl opacity-20"
+          className={`${styles['animate-random-move-1']} bg-blue-100 rounded-full w-96 h-96 blur-3xl opacity-20`}
           style={{ top: '10%', left: '5%' }}
         ></div>
         <div
-          className="bg-blue-100 rounded-full animate-random-move-2 w-80 h-80 blur-2xl opacity-30"
+          className={`${styles['animate-random-move-2']} bg-blue-100 rounded-full animate-random-move-2 w-80 h-80 blur-2xl opacity-30`}
           style={{ bottom: '15%', right: '10%' }}
         ></div>
         <div
-          className="w-64 h-64 bg-blue-100 rounded-full animate-random-move-3 blur-xl opacity-10"
+          className={`w-64 h-64 bg-blue-100 rounded-full ${styles['animate-random-move-3']} blur-xl opacity-10`}
           style={{ top: '5%', right: '20%' }}
         ></div>
         <div
-          className="bg-blue-100 rounded-full animate-random-move-1 w-72 h-72 blur-2xl opacity-15"
+          className={`bg-blue-100 rounded-full ${styles['animate-random-move-1']} w-72 h-72 blur-2xl opacity-15`}
           style={{ bottom: '10%', left: '15%' }}
         ></div>
         <div
-          className="bg-blue-100 rounded-full opacity-25 animate-random-move-2 w-60 h-60 blur-xl"
+          className={`bg-blue-100 rounded-full opacity-25 ${styles['animate-random-move-2']} w-60 h-60 blur-xl`}
           style={{ top: '20%', left: '60%' }}
         ></div>
 
         <div className="relative flex flex-col w-full max-w-6xl gap-4 p-8 border border-b md:gap-12 bg-white/10 backdrop-blur-3xl rounded-3xl md:p-12 md:flex-row backdrop-saturate-300 border-white/20">
-          {/* Left Side: Card inside super card */}
           <div className="w-full md:w-1/2">
             <div className="flex flex-col justify-between h-full px-4 py-6 md:px-6 md:py-8 bg-white/10 border-white/10 rounded-4xl">
               <div>
@@ -214,7 +137,6 @@ const ContactPage = () => {
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
           <div className="w-full md:w-1/2">
             <h2 className="mb-6 text-2xl font-semibold text-center text-white">
               Send Us a Message
@@ -274,7 +196,7 @@ const ContactPage = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 };

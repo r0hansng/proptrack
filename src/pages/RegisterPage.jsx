@@ -21,18 +21,6 @@ const RegisterPage = () => {
 
   return (
     <>
-      <style>
-        {`
-          .scrollbar-hidden::-webkit-scrollbar {
-            display: none;
-          }
-
-          .scrollbar-hidden {
-            -ms-overflow-style: none;
-            scrollbar-width: 0px;
-          }
-        `}
-      </style>
       <Toast title="Success" description="Account created successfully!" show={showToast} />
       <div className="min-h-screen flex items-center justify-center bg-[#1C1C1E] px-4">
         <div className="w-full max-w-xl max-h-[80vh] bg-[#1C1C1E] p-6 sm:p-12 rounded-3xl shadow-[0_6px_20px_6px_rgba(0,0,0,0.4)] relative flex flex-col overflow-hidden">

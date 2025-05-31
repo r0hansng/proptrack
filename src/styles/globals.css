@@ -22,3 +22,12 @@ html {
   -webkit-font-smoothing: antialiased;
   background-color: #0a0a0a;
 }
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: 0px;
+}

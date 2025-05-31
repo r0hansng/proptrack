@@ -1,0 +1,41 @@
+@keyframes random-move-1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(50vw, -30vh); }
+  50% { transform: translate(-40vw, 40vh); }
+  75% { transform: translate(30vw, 20vh); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes random-move-2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-30vw, 40vh); }
+  50% { transform: translate(40vw, -20vh); }
+  75% { transform: translate(-20vw, -30vh); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes random-move-3 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(20vw, 30vh); }
+  50% { transform: translate(-50vw, -40vh); }
+  75% { transform: translate(40vw, 10vh); }
+  100% { transform: translate(0, 0); }
+}
+
+.animate-random-move-1 {
+  animation: random-move-1 12s infinite alternate ease-in-out;
+  position: absolute;
+  z-index: 0;
+}
+
+.animate-random-move-2 {
+  animation: random-move-2 15s infinite alternate ease-in-out;
+  position: absolute;
+  z-index: 0;
+}
+
+.animate-random-move-3 {
+  animation: random-move-3 18s infinite alternate ease-in-out;
+  position: absolute;
+  z-index: 0;
+}
