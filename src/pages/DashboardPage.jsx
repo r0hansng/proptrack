@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import {
   ResponsiveContainer,
   PieChart,
@@ -13,7 +13,7 @@ import {
   Cell,
 } from 'recharts';
 import Button from '../components/UI/Button/Button';
-import { investedProperties as data } from '../data/investedProperties.data';
+import { useFetchApi } from '../utils/useFetchApi';
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -30,14 +30,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const Dashboard = () => {
-  const [investedProperties, setInvestedProperties] = useState([]);
   const [goal, setGoal] = useState(null);
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [goalInput, setGoalInput] = useState('');
 
-  useEffect(() => {
-    setInvestedProperties(data);
-  }, []);
+  const { investedProperties, loading, error } = useFetchApi();
 
   useEffect(() => {
     document.body.style.overflow = showGoalModal ? 'hidden' : 'auto';
@@ -59,15 +56,17 @@ const Dashboard = () => {
   }));
 
   const topPerformingProperties = investedProperties
+    .filter((p) => Array.isArray(p.valueGrowth) && p.valueGrowth.length > 1)
     .map((p) => {
-      const [initial, latest] = [p.valueGrowth[0], p.valueGrowth.at(-1)];
+      const initial = p.valueGrowth[0];
+      const latest = p.valueGrowth[p.valueGrowth.length - 1];
       return {
         ...p,
         roi: ((latest - initial) / p.investmentRequired) * 100,
       };
     })
     .sort((a, b) => b.roi - a.roi)
-    .slice(0, 3);
+    .slice(0, Math.min(3, investedProperties.length));
 
   const recentActivities = [
     {
@@ -240,11 +239,15 @@ const Dashboard = () => {
       <div className="p-6 mb-8 border shadow-md rounded-xl bg-white/5 backdrop-blur-md border-white/10">
         <h3 className="mb-4 text-xl font-medium text-white">Top Performing Properties</h3>
         <ul>
-          {topPerformingProperties.map((p, i) => (
-            <li key={i} className="mb-2 text-sm text-white">
-              <strong>{p.title}</strong> — ROI: {p.roi.toFixed(2)}%
-            </li>
-          ))}
+          {topPerformingProperties.length === 0 ? (
+            <li className="text-sm text-gray-400">No performance data available.</li>
+          ) : (
+            topPerformingProperties.map((p, i) => (
+              <li key={i} className="mb-2 text-sm text-white">
+                <strong>{p.title}</strong> — ROI: {p.roi.toFixed(2)}%
+              </li>
+            ))
+          )}
         </ul>
       </div>
 

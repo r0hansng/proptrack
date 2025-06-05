@@ -205,11 +205,13 @@ const PropertyCard = ({ property }) => {
             </button>
           </div>
           <div className="ml-auto">
+            {/* 
             <Link className="w-full">
               <Button variant="primary" size="sm" className="font-normal rounded-lg">
                 Invest Now
               </Button>
             </Link>
+            */}
           </div>
         </div>
       </div>

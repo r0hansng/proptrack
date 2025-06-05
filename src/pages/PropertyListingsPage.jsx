@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
-import { investedProperties } from '../data/investedProperties.data';
+import { useFetchApi } from '../utils/useFetchApi';
 
 const PropertyListingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { investedProperties, loading, error } = useFetchApi();
 
   useEffect(() => {
     const user =
