@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
-import { useFetchApi } from '../utils/useFetchApi';
+import { useFetchApi } from '../hooks/useFetchApi';
+import Loader from '../components/UI/Loader/Loader.jsx'; // <-- Import Loader
 
 const PropertyListingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,7 +24,9 @@ const PropertyListingPage = () => {
       </h1>
 
       <div className="relative z-10">
-        {!isLoggedIn ? (
+        {loading ? (
+          <Loader />
+        ) : !isLoggedIn ? (
           <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
             <p className="mb-6 text-5xl font-semibold text-white w-[80%] sm:w-[60%] lg:w-[40%] mx-auto">
               Log in to see the properties you are invested in.

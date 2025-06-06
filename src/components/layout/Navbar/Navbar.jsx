@@ -195,7 +195,7 @@ const Navbar = () => {
 
               {/* Modal box */}
               <motion.div
-                className="z-10 bg-white/5 rounded-xl shadow-xl p-6 w-[90%] max-w-sm translate-y-[-50%] top-[15vh] absolute border-white/20 border"
+                className="z-10 bg-black/85 rounded-xl shadow-xl p-6 w-[90%] max-w-sm translate-y-[-50%] top-[15vh] absolute border-white/20 border"
                 initial={{ scale: 0.9, y: -20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: -20 }}

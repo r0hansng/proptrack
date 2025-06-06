@@ -13,7 +13,8 @@ import {
   Cell,
 } from 'recharts';
 import Button from '../components/UI/Button/Button';
-import { useFetchApi } from '../utils/useFetchApi';
+import Loader from '../components/UI/Loader/Loader.jsx';
+import { useFetchApi } from '../hooks/useFetchApi';
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -91,6 +92,10 @@ const Dashboard = () => {
   };
 
   const goalProgress = goal ? Math.min((totalInvestment / goal) * 100, 100) : 0;
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen px-6 py-20 text-white bg-[#121212] sm:px-12 relative">
