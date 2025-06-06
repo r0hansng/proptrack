@@ -119,7 +119,6 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              {/* Centered Privacy Image */}
               <div className="mt-8 text-xs text-center text-white/60">
                 <img
                   src="https://www.apple.com/legal/images/icon_dataprivacy_2x.png"

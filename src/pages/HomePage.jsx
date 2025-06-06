@@ -110,7 +110,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* CTA */}
         <section className="relative z-10 px-4 py-16 text-white sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="mb-4 text-3xl font-semibold">Ready to Start Investing?</h2>

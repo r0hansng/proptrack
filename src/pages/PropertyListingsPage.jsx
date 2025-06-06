@@ -28,13 +28,6 @@ const PropertyListingPage = () => {
             <p className="mb-6 text-5xl font-semibold text-white w-[80%] sm:w-[60%] lg:w-[40%] mx-auto">
               Log in to see the properties you are invested in.
             </p>
-            {/* Optional: Uncomment this button for login redirection */}
-            {/* <button
-              className="px-6 py-2 text-white transition bg-blue-500 rounded-full hover:bg-blue-600"
-              onClick={() => window.location.href = "/login"}
-            >
-              Log in
-            </button> */}
           </div>
         ) : (
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

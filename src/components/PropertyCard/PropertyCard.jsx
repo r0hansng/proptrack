@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { FiBookmark, FiShare2, FiDownload, FiPhone } from 'react-icons/fi';

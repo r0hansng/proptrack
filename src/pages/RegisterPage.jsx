@@ -54,7 +54,6 @@ const RegisterPage = () => {
 
               <label className="text-white text-md">Birthday</label>
               <div className="flex gap-4">
-                {/* Month Dropdown */}
                 <div className="relative w-1/3">
                   <select
                     name="month"
@@ -96,7 +95,6 @@ const RegisterPage = () => {
                   </div>
                 </div>
 
-                {/* Day Dropdown */}
                 <div className="relative w-1/3">
                   <select
                     name="day"
@@ -125,7 +123,6 @@ const RegisterPage = () => {
                   </div>
                 </div>
 
-                {/* Year Dropdown */}
                 <div className="relative w-1/3">
                   <select
                     name="year"
